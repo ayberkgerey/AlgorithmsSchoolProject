@@ -2,5 +2,5 @@
 
 <ul>
 <li>Reading is completed.</li>
-<li>Target is parsing.</li>
+<li>Target is parsing with Java.</li>
 </ul>
