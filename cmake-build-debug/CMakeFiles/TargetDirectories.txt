@@ -1,0 +1,3 @@
+D:/B102proje2_AyberkGerey/cmake-build-debug/CMakeFiles/B102proje2_AyberkGerey.dir
+D:/B102proje2_AyberkGerey/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/B102proje2_AyberkGerey/cmake-build-debug/CMakeFiles/rebuild_cache.dir
