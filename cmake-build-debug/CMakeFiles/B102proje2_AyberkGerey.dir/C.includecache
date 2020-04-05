@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/B102proje2_AyberkGerey/main.c
+stdio.h
+-
+process.h
+-
+time.h
+-
+dxtmpl.h
+-
+

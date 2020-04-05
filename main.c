@@ -1,14 +1,13 @@
 #include <stdio.h>
 #include <process.h>
-#include <dxtmpl.h>
 #include <time.h>
+#include <dxtmpl.h>
 
 void continueOrStop(char decide);
 char getDecide();
 int secondChance , counter = 0;
 
 int rollDice(){
-     srand(time(NULL));
      int x = rand() % 6 + 1;
      int y = rand() % 6 + 1;
      return x+y;
@@ -17,6 +16,12 @@ int rollDice(){
 void theGame(){
     int a = rollDice();
     char decide2;
+
+    if(a == secondChance){
+        printf("Zarlar atiliyor... %d Kazandiniz\n",a);
+        char decide = getDecide();
+        continueOrStop(decide);
+    }
 
     if(a == 11 || a == 7){
         printf("Zarlar atiliyor... %d Kazandiniz\n",a);
@@ -32,14 +37,15 @@ void theGame(){
         printf("Zarlar atiliyor... %d Sonuc belirsiz , tekrar zar atilacak. At (a/A) ?\n",a);
         scanf("%c",&decide2);
         if(decide2 == 'a' ||decide2 == 'A'){
-
             if(counter == 0){
                 secondChance = a;
                 counter++;
+                theGame();
             }
+        }
 
-
-
+        else{
+            printf("CRAPS sona erdi\n");
         }
 
     }
@@ -65,6 +71,7 @@ char getDecide(){
 
 int main() {
 
+    theGame();
 
     system("pause");
     return 0;
