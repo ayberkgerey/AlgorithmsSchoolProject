@@ -1,2 +1,2 @@
-<h1>Change this repo</h1>
+<h1>Algorithms School Project</h1>
 
