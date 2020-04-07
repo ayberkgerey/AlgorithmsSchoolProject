@@ -9,10 +9,10 @@
 D:/B102proje2_AyberkGerey/main.c
 stdio.h
 -
-process.h
+stdlib.h
 -
 time.h
 -
-dxtmpl.h
+ctype.h
 -
 

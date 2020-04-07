@@ -1,78 +1,71 @@
 #include <stdio.h>
-#include <process.h>
+#include <stdlib.h>
 #include <time.h>
-#include <dxtmpl.h>
+#include <ctype.h>
 
-void continueOrStop(char decide);
-char getDecide();
-int secondChance , counter = 0;
+void desicion(int sum);
+void rollDice();
 
-int rollDice(){
-     int x = rand() % 6 + 1;
-     int y = rand() % 6 + 1;
-     return x+y;
-}
+int savedDice = 13;
+int counter = 0;
 
-void theGame(){
-    int a = rollDice();
-    char decide2;
+void rollDice(){
+    srand(time(NULL));
+    int x = rand() % 6 + 1;
+    int y = rand() % 6 + 1;
 
-    if(a == secondChance){
-        printf("Zarlar atiliyor... %d Kazandiniz\n",a);
-        char decide = getDecide();
-        continueOrStop(decide);
+    if(x+y == 7 || x+y == 11){
+        printf("Zarlar atiliyor... %d kazandiniz\n",x+y);
+        printf("Yeni oyun oynansin mi ? (e/E - h/H) ?");
+        desicion(x+y);
     }
-
-    if(a == 11 || a == 7){
-        printf("Zarlar atiliyor... %d Kazandiniz\n",a);
-        char decide = getDecide();
-        continueOrStop(decide);
+    if(x+y == 2 || x+y == 3 || x+y == 12){
+        printf("Zarlar atiliyor... %d kaybettiniz\n",x+y);
+        printf("Yeni oyun oynansin mi ? (e/E - h/H) ?");
+        desicion(x+y);
     }
-    else if( a == 2 || a == 3 || a == 12){
-        printf("Zarlar atiliyor... %d Kaybettiniz\n",a);
-        char decide = getDecide();
-        continueOrStop(decide);
-    }
-    else{
-        printf("Zarlar atiliyor... %d Sonuc belirsiz , tekrar zar atilacak. At (a/A) ?\n",a);
-        scanf("%c",&decide2);
-        if(decide2 == 'a' ||decide2 == 'A'){
-            if(counter == 0){
-                secondChance = a;
-                counter++;
-                theGame();
-            }
-        }
-
-        else{
-            printf("CRAPS sona erdi\n");
-        }
-
+    if(x+y == 4 || x+y == 5 || x+y == 6 || x+y == 8 || x+y == 9 || x+y == 10){
+        printf("Zarlar atiliyor... %d Sonuc belirsiz , tekrar zar atilacak. At (a/A) ?\n",x+y);
+        desicion(x+y);
     }
 }
 
-void continueOrStop(char decide) {
+void desicion(int sum){
 
-    if(decide == 'e' || decide == 'E'){
-        theGame();
-    }
-    else if (decide == 'h' || decide == 'H'){
-        printf("CRAPS sona erdi\n");
-    }
-}
-
-char getDecide(){
     char decide;
-    printf("Yeni oyun oynansin mi (e/E - h/H) ?\n");
     scanf("%c",&decide);
-    return decide;
-}
+    decide = tolower(decide);
 
+    switch(decide){
+
+        case 'e':
+            rollDice();
+            break;
+
+        case 'h':
+            printf("CRAPS sona erdi.");
+            break;
+
+        case 'a':
+
+            if(savedDice == sum){
+                printf("Zarlar atiliyor... %d kazandiniz\n",savedDice);
+                printf("Yeni oyun oynansin mi ? (e/E - h/H) ?");
+                desicion(sum);
+                break;
+            }
+
+            if(counter == 0){
+                savedDice = sum;
+                counter ++;
+                rollDice();
+                break;
+            }
+    }
+}
 
 int main() {
-
-    theGame();
-
+    rollDice();
     system("pause");
     return 0;
 }
