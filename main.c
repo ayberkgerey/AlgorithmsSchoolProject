@@ -4,7 +4,10 @@
 #include <ctype.h>
 
 int rollDice();
+
 void decideScore(int sum);
+
+void longGame(int savedSum);
 
 int main() {
     int sum;
@@ -16,6 +19,8 @@ int main() {
 
         scanf("%c", decide);
         lastDecide = tolower(decide);
+
+        if (decide == 'a') longGame(sum);
     }
 
     system("pause");
@@ -39,4 +44,19 @@ void decideScore(int sum) {
         printf("Zarlar atiliyor... %d Sonuc Belirsiz, tekrar zar atilacak. At(a/A) ?", sum);
     }
 
+}
+
+void longGame(int savedSum) {
+
+    int currentSum;
+
+    while (savedSum != currentSum) {
+        currentSum = rollDice();
+        printf("Zarlar atiliyor... %d Sonuc Belirsiz, tekrar zar atilacak. At(a/A) ?", currentSum);
+    }
+
+    if (savedSum == currentSum)
+        printf("Zarlar atiliyor... %d Kazandiniz");
+    else
+        printf("CRAPS sona erdi.");
 }
